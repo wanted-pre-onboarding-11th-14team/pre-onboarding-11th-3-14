@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 import ReactMarkdown from 'react-markdown';
+import styled from 'styled-components';
+import remarkGfm from 'remark-gfm';
 
 interface IssueItemComponentProps {
   data: any;
@@ -8,29 +10,89 @@ interface IssueItemComponentProps {
 
 const IssueItemComponents: React.FC<IssueItemComponentProps> = memo(({ data }) => {
   const [year, month, day] = new Date(data?.created_at).toLocaleDateString('ko-KR').split('.');
+  console.log(data?.body);
 
   return (
-    <div>
-      <h1>IssueItem</h1>
-      <div>
-        <img src={data?.user.avatar_url} alt='프로필 사진' />
+    <IssueItemContainer>
+      <div className='userInfo'>
+        <div className='userProfile'>
+          <img src={data?.user.avatar_url} alt='프로필 사진' />
+        </div>
+        <div className='userInfoCenter'>
+          <div className='title'>
+            #{data?.number} {data?.title}
+          </div>
+          <div className='writer'>
+            작성자: {data?.user.login}, 작성일:
+            {year}년 {month}월 {day}일
+          </div>
+        </div>
+        <div className='comment'>코멘트: {data?.comments}</div>
       </div>
-      <div>
-        #{data?.number} {data?.title}
-      </div>
-      <div>
-        작성자: {data?.user.login}, 작성일:
-        {year}년 {month}월 {day}일
-      </div>
-      <div>코멘트: {data?.comments}</div>
       <br />
-      <div>
-        <ReactMarkdown>{data?.body}</ReactMarkdown>
+      <div className='markdown'>
+        <ReactMarkdown children={data?.body} remarkPlugins={[remarkGfm]}></ReactMarkdown>
       </div>
 
       <div></div>
-    </div>
+    </IssueItemContainer>
   );
 });
+
+const IssueItemContainer = styled.div`
+  padding: 30px;
+
+  .userInfo {
+    padding: 20px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+
+    .userProfile {
+      margin-right: 10px;
+      img {
+        width: 100px;
+      }
+    }
+
+    .userInfoCenter {
+      width: 80%;
+      padding-top: 10px;
+
+      .title {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .writer {
+        font-size: 20px;
+      }
+    }
+
+    .comment {
+      height: 100px;
+      line-height: 100px;
+      margin-right: 20px;
+    }
+  }
+
+  .markdown {
+    width: 100%;
+    word-wrap: break-word;
+
+    img {
+      max-width: 100%;
+    }
+
+    code {
+      display: inline-block;
+      padding: 3px;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: red;
+    }
+  }
+`;
 
 export default IssueItemComponents;

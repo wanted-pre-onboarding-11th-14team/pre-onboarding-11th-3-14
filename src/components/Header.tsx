@@ -20,8 +20,10 @@ const HeaderContainer = styled.div`
   height: 50px;
   font-size: 30px;
   margin-bottom: 20px;
+  margin-top: 10px;
   line-height: 50px;
   text-align: center;
+  font-weight: bold;
 `;
 
 export default Header;
