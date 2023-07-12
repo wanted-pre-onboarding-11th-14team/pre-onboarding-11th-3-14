@@ -14,12 +14,8 @@ const IssueList = memo(() => {
       <IssueListComponent data={data} />
 
       {loading && <Loading />}
-      <div
-        style={{ height: '100px', backgroundColor: 'red' }}
-        ref={setObservationTarget}
-        id='target'>
-        target
-      </div>
+
+      {loading || <div style={{ height: '200px' }} ref={setObservationTarget} id='target'></div>}
     </div>
   );
 });
