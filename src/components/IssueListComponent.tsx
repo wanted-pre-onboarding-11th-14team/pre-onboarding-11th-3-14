@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
+import wantedbanner from '../assets/img/wantedbanner.webp';
 
 interface IssueListComponentProps {
   data: any[];
@@ -13,15 +14,15 @@ const IssueListComponent: React.FC<IssueListComponentProps> = memo(({ data }) =>
           const [year, month, day] = new Date(v?.created_at).toLocaleDateString('ko-KR').split('.');
 
           return (
-            <>
+            <div key={i}>
               {i > 0 && i % 4 === 0 && (
                 <li>
                   <a href='https://www.wanted.co.kr/'>
-                    <img src='https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100' />
+                    <img src={wantedbanner} alt='원티드' />
                   </a>
                 </li>
               )}
-              <li key={i}>
+              <li>
                 <a href={'/issue/' + v?.number}>
                   <div className='issueWrap'>
                     <div className='issueLeft'>
@@ -39,7 +40,7 @@ const IssueListComponent: React.FC<IssueListComponentProps> = memo(({ data }) =>
                   <br />
                 </a>
               </li>
-            </>
+            </div>
           );
         })}
       </ul>

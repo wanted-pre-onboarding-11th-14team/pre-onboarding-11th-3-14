@@ -8,7 +8,8 @@ const IssueItem = memo(() => {
   const [data, loading, error, date] = useFetchIssueItem();
 
   if (loading) return <Loading />;
-  if (error) return <Error />;
+
+  if (data?.state !== 'open' || error) return <Error error={error} />;
 
   return <IssueItemComponents data={data} date={date} />;
 });

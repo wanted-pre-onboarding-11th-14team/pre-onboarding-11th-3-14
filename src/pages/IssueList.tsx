@@ -7,7 +7,7 @@ import IssueListComponent from '../components/IssueListComponent';
 const IssueList = memo(() => {
   const [data, loading, error, setObservationTarget] = useFetchIssueList();
 
-  if (error) return <Error />;
+  if (error) return <Error error={error} />;
 
   return (
     <div>

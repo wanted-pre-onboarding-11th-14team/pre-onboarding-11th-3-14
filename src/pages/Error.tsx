@@ -1,13 +1,16 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 
-const Error = memo(() => {
+const Error = memo((error: any) => {
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
+
   return (
     <Background>
       <ErrorText>
-        😢
         <br />
-        Not Found
+        {error?.error?.message ? '😢' + error?.error?.message : '🤣 Closed issue'}
       </ErrorText>
     </Background>
   );
@@ -19,7 +22,7 @@ const Background = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
-  background: #ffffffb7;
+  background: white;
   z-index: 999;
   display: flex;
   flex-direction: column;
