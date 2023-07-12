@@ -11,12 +11,12 @@ function useFetchIssueList() {
 
   const fetchMoreIssue = useCallback(() => {
     setPage(prev => prev + 1);
-    console.log(page);
   }, [data]);
 
   const setObservationTarget = useIntersectionObserver(fetchMoreIssue);
 
   useEffect(() => {
+    console.log(page);
     getIssueList(dispatch, page);
   }, [page]);
 

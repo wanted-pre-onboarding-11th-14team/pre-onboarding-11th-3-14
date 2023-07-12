@@ -10,7 +10,6 @@ interface IssueItemComponentProps {
 
 const IssueItemComponents: React.FC<IssueItemComponentProps> = memo(({ data }) => {
   const [year, month, day] = new Date(data?.created_at).toLocaleDateString('ko-KR').split('.');
-  console.log(data?.body);
 
   return (
     <IssueItemContainer>
@@ -52,12 +51,12 @@ const IssueItemContainer = styled.div`
     .userProfile {
       margin-right: 10px;
       img {
-        width: 100px;
+        width: 150px;
       }
     }
 
     .userInfoCenter {
-      width: 80%;
+      width: 60%;
       padding-top: 10px;
 
       .title {

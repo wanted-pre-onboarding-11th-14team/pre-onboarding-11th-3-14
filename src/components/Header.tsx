@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 import { useIssueState } from '../api/IssueContext';
+import { NavLink } from 'react-router-dom';
 
 const Header = memo(() => {
   const state = useIssueState();
@@ -9,8 +10,10 @@ const Header = memo(() => {
   return (
     <div>
       <HeaderContainer>
-        {data && data.repository_url.split('/').reverse()[1] + ' / '}
-        {data && data.repository_url.split('/').reverse()[0]}
+        <NavLink to='/'>
+          {data && data.repository_url.split('/').reverse()[1] + ' / '}
+          {data && data.repository_url.split('/').reverse()[0]}
+        </NavLink>
       </HeaderContainer>
     </div>
   );
@@ -24,6 +27,11 @@ const HeaderContainer = styled.div`
   line-height: 50px;
   text-align: center;
   font-weight: bold;
+
+  a {
+    text-decoration: none;
+    color: rgb(34, 135, 246);
+  }
 `;
 
 export default Header;

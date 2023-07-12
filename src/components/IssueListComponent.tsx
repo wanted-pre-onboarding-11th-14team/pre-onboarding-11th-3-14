@@ -59,6 +59,7 @@ const IssueListContainer = styled.div`
     li {
       border-bottom: 1px solid black;
       margin-bottom: 10px;
+      list-style: none;
 
       a {
         text-decoration: none;

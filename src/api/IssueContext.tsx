@@ -134,7 +134,6 @@ export function useIssueDispatch(): React.Dispatch<IssueAction> {
 }
 
 // API 처리 함수
-
 export async function getIssueList(dispatch: any, page: number) {
   dispatch({ type: 'GET_ISSUE_LIST' });
   try {
