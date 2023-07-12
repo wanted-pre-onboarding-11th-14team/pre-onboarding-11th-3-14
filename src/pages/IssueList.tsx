@@ -11,8 +11,6 @@ const IssueList = memo(() => {
 
   return (
     <div>
-      <h1>IssueList</h1>
-
       <IssueListComponent data={data} />
 
       {loading && <Loading />}

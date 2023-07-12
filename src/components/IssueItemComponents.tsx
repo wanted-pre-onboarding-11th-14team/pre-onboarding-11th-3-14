@@ -6,8 +6,8 @@ interface IssueItemComponentProps {
   date: Date;
 }
 
-const IssueItemComponents: React.FC<IssueItemComponentProps> = memo(({ data, date }) => {
-  const [year, month, day] = date.toLocaleDateString('ko-KR').split('.');
+const IssueItemComponents: React.FC<IssueItemComponentProps> = memo(({ data }) => {
+  const [year, month, day] = new Date(data?.created_at).toLocaleDateString('ko-KR').split('.');
 
   return (
     <div>

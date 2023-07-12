@@ -20,7 +20,6 @@ const HeaderContainer = styled.div`
   height: 50px;
   font-size: 30px;
   margin-bottom: 20px;
-  background-color: gray;
   line-height: 50px;
   text-align: center;
 `;
