@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { SetStateAction, useEffect, useRef, useState, Dispatch } from 'react';
 
-export const useIntersectionObserver = (callback: any): any => {
+export const useIntersectionObserver = (callback: () => void): Dispatch<SetStateAction<null>> => {
   const [observationTarget, setObservationTarget] = useState(null);
   const observer = useRef(
     new IntersectionObserver(
