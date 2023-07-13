@@ -1,19 +1,20 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
+import spinner from '../assets/img/spinner.gif';
 
 const Loading = memo(() => {
   return (
     <Background>
-      <LoadingText>Loading . . .</LoadingText>
+      <img src={spinner} />
     </Background>
   );
 });
 
 const Background = styled.div`
-  position: absolute;
+  position: sticky;
   width: 100vw;
   height: 100vh;
-  top: 0;
+  bottom: 0;
   left: 0;
   background: #ffffffb7;
   z-index: 999;
@@ -21,11 +22,6 @@ const Background = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-const LoadingText = styled.div`
-  font: 2rem 'Noto Sans KR';
-  text-align: center;
 `;
 
 export default Loading;
