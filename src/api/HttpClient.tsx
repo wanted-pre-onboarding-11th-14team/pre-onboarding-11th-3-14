@@ -7,8 +7,7 @@ export class HttpClient {
   #issuesAxios: AxiosInstance | null;
 
   constructor() {
-    this.baseURL =
-      process.env.REACT_APP_API_GITHUB_URL || 'https://api.github.com/repos/facebook/react/';
+    this.baseURL = process.env.REACT_APP_API_GITHUB_URL;
     this.#issuesAxios = null;
     this.create();
   }
@@ -19,7 +18,7 @@ export class HttpClient {
       headers: {
         'X-GitHub-Api-Version': '2022-11-28',
         Accept: 'application/vnd.github.raw+json',
-        // Authorization: 'Bearer ' + process.env.REACT_APP_API_GITHUB_TOKEN,
+        Authorization: 'Bearer ' + process.env.REACT_APP_API_GITHUB_TOKEN,
       },
     });
   }
