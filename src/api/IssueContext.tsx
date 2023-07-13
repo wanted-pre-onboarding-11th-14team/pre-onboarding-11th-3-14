@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useContext, ReactNode } from 'react';
-import AxiosInstance from './AxiosInstance';
+// import AxiosInstance from './AxiosInstance';
+import { httpClient } from './HttpClient';
 
 interface Issue {
   [key: string]: any;
@@ -134,20 +135,22 @@ export function useIssueDispatch(): React.Dispatch<IssueAction> {
 }
 
 // API 처리 함수
-export async function getIssueList(dispatch: any, page: number) {
+export async function getIssueList(dispatch: React.Dispatch<IssueAction>, page: number) {
   dispatch({ type: 'GET_ISSUE_LIST' });
   try {
-    const response = await AxiosInstance.get(`issues?sort=comments&page=${page}&per_page=30`);
+    // const response = await AxiosInstance.get(`issues?sort=comments&page=${page}&per_page=30`);
+    const response = await httpClient.fetch(`/issues?sort=comments&page=${page}&per_page=30`);
     dispatch({ type: 'GET_ISSUE_LIST_SUCCESS', data: response.data });
   } catch (e) {
     dispatch({ type: 'GET_ISSUE_LIST_ERROR', error: e });
   }
 }
 
-export async function getIssueItem(dispatch: any, id: number) {
+export async function getIssueItem(dispatch: React.Dispatch<IssueAction>, id: number) {
   dispatch({ type: 'GET_ISSUE' });
   try {
-    const response = await AxiosInstance.get('issues/' + id);
+    // const response = await AxiosInstance.get('/issues/' + id);
+    const response = await httpClient.fetch(`/issues/${id}`);
     dispatch({ type: 'GET_ISSUE_SUCCESS', data: response.data });
   } catch (e) {
     dispatch({ type: 'GET_ISSUE_ERROR', error: e });
