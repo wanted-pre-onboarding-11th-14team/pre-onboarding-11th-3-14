@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useIssueState, useIssueDispatch, getIssueList } from '../api/IssueContext';
+import { useIssueState, useIssueDispatch, useIssueApi } from '../api/IssueContext';
 import { useIntersectionObserver } from './useIntersectionObserver';
 
 type Issue = { [key: string]: any };
@@ -7,6 +7,7 @@ type Issue = { [key: string]: any };
 function useFetchIssueList() {
   const state = useIssueState();
   const dispatch = useIssueDispatch();
+  const apis = useIssueApi();
   const [data, setData] = useState<Issue>([]);
   const [page, setPage] = useState(1);
   const { data: issueList, loading, error } = state.issueList;
@@ -19,7 +20,7 @@ function useFetchIssueList() {
 
   useEffect(() => {
     console.log(page);
-    getIssueList(dispatch, page);
+    apis.getIssueList(dispatch, page);
   }, [page]);
 
   useEffect(() => {

@@ -1,16 +1,15 @@
-import React, { memo } from 'react';
 import styled from 'styled-components';
 
-const Loading = memo(() => {
+const Loading = () => {
   return (
     <Background>
       <LoadingText>Loading . . .</LoadingText>
     </Background>
   );
-});
+};
 
 const Background = styled.div`
-  position: absolute;
+  position: sticky;
   width: 100vw;
   height: 100vh;
   top: 0;

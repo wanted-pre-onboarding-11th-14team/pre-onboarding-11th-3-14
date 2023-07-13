@@ -1,31 +1,6 @@
-import React, { createContext, useReducer, useContext, ReactNode } from 'react';
-// import AxiosInstance from './AxiosInstance';
-import { httpClient } from './HttpClient';
-
-interface Issue {
-  [key: string]: any;
-}
-
-interface IssueState {
-  issueList: {
-    loading: boolean;
-    data: Issue[] | null;
-    error: any;
-  };
-  issue: {
-    loading: boolean;
-    data: Issue | null;
-    error: any;
-  };
-}
-
-type IssueAction =
-  | { type: 'GET_ISSUE_LIST' }
-  | { type: 'GET_ISSUE_LIST_SUCCESS'; data: Issue[] }
-  | { type: 'GET_ISSUE_LIST_ERROR'; error: any }
-  | { type: 'GET_ISSUE' }
-  | { type: 'GET_ISSUE_SUCCESS'; data: Issue }
-  | { type: 'GET_ISSUE_ERROR'; error: any };
+import { Dispatch, createContext, useReducer, useContext, ReactNode } from 'react';
+import { HttpClient } from './HttpClient';
+import { ApiProps, IssueState, IssueAction } from './IssueModel';
 
 // UsersContext 에서 사용 할 기본 상태
 const initialState: IssueState = {
@@ -100,18 +75,26 @@ function issueReducer(state: IssueState, action: IssueAction): IssueState {
 
 // State 용 Context 와 Dispatch 용 Context 따로 만들어주기
 const IssueStateContext = createContext<IssueState | null>(null);
-const IssueDispatchContext = createContext<React.Dispatch<IssueAction> | null>(null);
+const IssueDispatchContext = createContext<Dispatch<IssueAction> | null>(null);
+const IssueAPIContext = createContext<ApiProps | null>(null);
 
 interface IssueProviderProps {
+  httpClient: HttpClient;
   children: ReactNode;
 }
 
 // 위에서 선언한 두가지 Context 들의 Provider 로 감싸주는 컴포넌트
-export function IssueProvider({ children }: IssueProviderProps) {
+export function IssueProvider({ httpClient, children }: IssueProviderProps) {
+  const getIssueList = httpClient.getIssueList.bind(httpClient);
+  const getIssueItem = httpClient.getIssueItem.bind(httpClient);
   const [state, dispatch] = useReducer(issueReducer, initialState);
   return (
     <IssueStateContext.Provider value={state}>
-      <IssueDispatchContext.Provider value={dispatch}>{children}</IssueDispatchContext.Provider>
+      <IssueDispatchContext.Provider value={dispatch}>
+        <IssueAPIContext.Provider value={{ getIssueList, getIssueItem }}>
+          {children}
+        </IssueAPIContext.Provider>
+      </IssueDispatchContext.Provider>
     </IssueStateContext.Provider>
   );
 }
@@ -120,39 +103,22 @@ export function IssueProvider({ children }: IssueProviderProps) {
 export function useIssueState(): IssueState {
   const state = useContext(IssueStateContext);
   if (!state) {
-    throw new Error('Cannot find UsersProvider');
+    throw new Error('Cannot find IssueProvider');
   }
   return state;
 }
 
 // Dispatch 를 쉽게 사용 할 수 있게 해주는 커스텀 Hook
-export function useIssueDispatch(): React.Dispatch<IssueAction> {
+export function useIssueDispatch(): Dispatch<IssueAction> {
   const dispatch = useContext(IssueDispatchContext);
   if (!dispatch) {
-    throw new Error('Cannot find UsersProvider');
+    throw new Error('Cannot find IssueProvider');
   }
   return dispatch;
 }
 
-// API 처리 함수
-export async function getIssueList(dispatch: React.Dispatch<IssueAction>, page: number) {
-  dispatch({ type: 'GET_ISSUE_LIST' });
-  try {
-    // const response = await AxiosInstance.get(`issues?sort=comments&page=${page}&per_page=30`);
-    const response = await httpClient.fetch(`/issues?sort=comments&page=${page}&per_page=30`);
-    dispatch({ type: 'GET_ISSUE_LIST_SUCCESS', data: response.data });
-  } catch (e) {
-    dispatch({ type: 'GET_ISSUE_LIST_ERROR', error: e });
-  }
-}
-
-export async function getIssueItem(dispatch: React.Dispatch<IssueAction>, id: number) {
-  dispatch({ type: 'GET_ISSUE' });
-  try {
-    // const response = await AxiosInstance.get('/issues/' + id);
-    const response = await httpClient.fetch(`/issues/${id}`);
-    dispatch({ type: 'GET_ISSUE_SUCCESS', data: response.data });
-  } catch (e) {
-    dispatch({ type: 'GET_ISSUE_ERROR', error: e });
-  }
+export function useIssueApi(): ApiProps {
+  const apis = useContext(IssueAPIContext);
+  if (!apis) throw new Error('Cannot connected Api');
+  return apis;
 }

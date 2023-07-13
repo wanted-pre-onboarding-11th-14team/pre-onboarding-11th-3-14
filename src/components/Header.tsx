@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useIssueState } from '../api/IssueContext';
 import { NavLink } from 'react-router-dom';
 
-const Header = memo(() => {
+const Header = () => {
   const state = useIssueState();
   const data = (state.issueList.data && state.issueList.data[0]) || state.issue.data;
 
@@ -17,7 +17,7 @@ const Header = memo(() => {
       </HeaderContainer>
     </div>
   );
-});
+};
 
 const HeaderContainer = styled.div`
   height: 50px;
