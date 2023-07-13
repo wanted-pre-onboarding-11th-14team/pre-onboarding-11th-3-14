@@ -3,9 +3,10 @@ import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import remarkGfm from 'remark-gfm';
 
+type Issue = { [key: string]: any };
+
 interface IssueItemComponentProps {
-  data: any;
-  date: Date;
+  data: Issue;
 }
 
 const IssueItemComponents: React.FC<IssueItemComponentProps> = memo(({ data }) => {
