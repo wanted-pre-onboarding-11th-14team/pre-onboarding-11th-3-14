@@ -5,7 +5,7 @@ function useFetchIssueItem() {
   const state = useIssueState();
   const dispatch = useIssueDispatch();
 
-  const { data: data, loading, error } = state.issue;
+  const { data, loading, error } = state.issue;
 
   useEffect(() => {
     const issueId: number = Number(window.location.pathname.split('/')[2]);
