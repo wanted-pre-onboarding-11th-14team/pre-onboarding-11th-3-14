@@ -1,7 +1,6 @@
-import React, { memo } from 'react';
 import styled from 'styled-components';
 
-const Error = memo((error: any) => {
+const Error = (error: any) => {
   return (
     <Background>
       <ErrorText>
@@ -10,7 +9,7 @@ const Error = memo((error: any) => {
       </ErrorText>
     </Background>
   );
-});
+};
 
 const Background = styled.div`
   position: absolute;

@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { useIssueState } from '../api/IssueContext';
 import { NavLink } from 'react-router-dom';

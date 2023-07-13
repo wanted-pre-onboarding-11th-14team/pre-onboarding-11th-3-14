@@ -19,7 +19,6 @@ function useFetchIssueList() {
   const setObservationTarget = useIntersectionObserver(fetchMoreIssue);
 
   useEffect(() => {
-    console.log(page);
     apis.getIssueList(dispatch, page);
   }, [page]);
 

@@ -1,10 +1,9 @@
-import React, { memo } from 'react';
 import Loading from '../components/Loading';
 import Error from './Error';
 import useFetchIssueList from '../hooks/useFetchIssueList';
 import IssueListComponent from '../components/IssueListComponent';
 
-const IssueList = memo(() => {
+const IssueList = () => {
   const [data, loading, error, setObservationTarget] = useFetchIssueList();
 
   if (error) return <Error error={error} />;
@@ -18,6 +17,6 @@ const IssueList = memo(() => {
       {loading || <div style={{ height: '200px' }} ref={setObservationTarget} id='target'></div>}
     </div>
   );
-});
+};
 
 export default IssueList;
