@@ -46,6 +46,7 @@
   ![react-markdown](https://img.shields.io/badge/react--markdown-8.0.7-%23671DDF)
 
 - Deploy
+  
   ![aws s3](https://img.shields.io/badge/Amazon_S3--S?logo=amazonaws&logoColor=white)
 
 ## 폴더 구조
@@ -113,4 +114,4 @@ npm run start
 
 | Loading                                                                                                                                                                   | Error                                                                                                                                                                     | Closed Issue                                                                                                                                                              |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <img src="https://github.com/wanted-pre-onboarding-11th-14team/pre-onboarding-11th-3-14/assets/109052469/f334dff1-18f3-4253-9dc0-0756dc41dcd8" width="150" height="100"/> | <img src="https://github.com/wanted-pre-onboarding-11th-14team/pre-onboarding-11th-3-14/assets/109052469/4674e7a6-21ef-497e-9a56-a056383d4014" width="150" height="100"/> | <img src="https://github.com/wanted-pre-onboarding-11th-14team/pre-onboarding-11th-3-14/assets/109052469/5c8003be-f48a-40e1-b661-c39891db36a1" width="150" height="100"/> |
+| <img src="https://github.com/wanted-pre-onboarding-11th-14team/pre-onboarding-11th-3-14/assets/109052469/f334dff1-18f3-4253-9dc0-0756dc41dcd8"/> | <img src="https://github.com/wanted-pre-onboarding-11th-14team/pre-onboarding-11th-3-14/assets/109052469/4674e7a6-21ef-497e-9a56-a056383d4014"/> | <img src="https://github.com/wanted-pre-onboarding-11th-14team/pre-onboarding-11th-3-14/assets/109052469/5c8003be-f48a-40e1-b661-c39891db36a1"/> |
